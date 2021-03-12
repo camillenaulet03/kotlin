@@ -3,6 +3,13 @@ package com.example.kotlin
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlin.helpers.AppDatabaseHelper
+import com.example.kotlin.adapters.CarAdapter
+import com.example.kotlin.models.Car
+
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val carsList = AppDatabaseHelper.getDatabase(this).countriesDAO().getCarList()
+
+        // Initialize RecyclerView
+        val recycler = findViewById<RecyclerView>(R.id.cars_list)
         // Progress Bar
         val progressDialog = ProgressDialog(this)
         progressDialog.setTitle(PROGRESS_BAR_TITLE)
@@ -37,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recycler.layoutManager = layoutManager
+
 
 //        val adapter = CarAdapter(data)
 //        recycler.adapter = adapter

@@ -6,7 +6,7 @@ import com.example.kotlin.models.Car
 @Dao
 abstract class CarsDTO {
     @Query("SELECT * FROM cars")
-    abstract fun getListeCountries(): MutableList<Car>
+    abstract fun getCarList(): MutableList<Car>
     @Insert
     abstract fun insert(vararg country: Car)
     @Update
