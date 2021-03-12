@@ -53,4 +53,11 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.2.6'
     kapt 'androidx.room:room-compiler:2.2.6'
 
+    /* RECYCLER VIEW */
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    /* PICASSO */
+    implementation 'com.squareup.okhttp:okhttp:2.2.0'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
