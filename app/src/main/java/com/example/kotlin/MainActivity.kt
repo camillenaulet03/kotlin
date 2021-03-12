@@ -7,15 +7,12 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin.helpers.AppDatabaseHelper
-import com.example.kotlin.adapters.CarAdapter
 import com.example.kotlin.models.Car
 
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlin.api.ApiInterface
+import com.example.kotlin.adapters.CarAdapter
+import com.example.kotlin.api.ApiCar
 import com.example.kotlin.api.ApiSingleton
-import com.example.kotlin.api.Car
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         const val PROGRESS_BAR_TITLE = "Récupération des voitures..."
     }
 
-    private var data: ArrayList<Car> = ArrayList()
+    private var data: ArrayList<ApiCar> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         val carsList = AppDatabaseHelper.getDatabase(this).countriesDAO().getCarList()
 
-        // Initialize RecyclerView
-        val recycler = findViewById<RecyclerView>(R.id.cars_list)
         // Progress Bar
         val progressDialog = ProgressDialog(this)
         progressDialog.setTitle(PROGRESS_BAR_TITLE)
@@ -53,16 +48,24 @@ class MainActivity : AppCompatActivity() {
 //        val adapter = CarAdapter(data)
 //        recycler.adapter = adapter
 
-        ApiSingleton.getSingleton.getCars().enqueue(object : Callback<List<Car>> {
-            override fun onResponse(call: Call<List<Car>>?, response: Response<List<Car>>?) {
+        ApiSingleton.getSingleton.getCars().enqueue(object : Callback<List<ApiCar>> {
+            override fun onResponse(call: Call<List<ApiCar>>?, response: Response<List<ApiCar>>?) {
                 progressDialog.dismiss()
                 data.addAll(response!!.body()!!)
                 Log.d("montag", data.toString())
-//                adapter.update(data.clone() as ArrayList<Car>)
-//                recycler.adapter?.notifyDataSetChanged()
+
+                val cars : MutableList<Car> = ArrayList()
+
+                for(car in data){
+                    cars.add(Car(car.id,car.nom,car.prixjournalierbase,car.categorieco2,car.image))
+                }
+                println(cars)
+                val carAdapter = CarAdapter(cars)
+                recycler.adapter = carAdapter
+
             }
 
-            override fun onFailure(call: Call<List<Car>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<ApiCar>>?, t: Throwable?) {
                 progressDialog.dismiss()
             }
         })

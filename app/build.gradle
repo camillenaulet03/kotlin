@@ -53,8 +53,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     /* DATABASE DEPENDENCIES */
-    implementation 'androidx.room:room-runtime:2.2.6'
     kapt 'androidx.room:room-compiler:2.2.6'
+    implementation 'androidx.room:room-runtime:2.2.6'
 
     /* RECYCLER VIEW */
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

@@ -8,7 +8,7 @@ class Car(
     @PrimaryKey(autoGenerate = true)
     val id: Long  = 0,
     val name: String,
-    val price: Double,
+    val price: String,
     val co2: String,
     val image: String
 
