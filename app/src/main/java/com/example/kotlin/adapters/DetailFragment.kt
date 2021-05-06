@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kotlin.R
 import com.example.kotlin.helpers.AppDatabaseHelper
@@ -36,6 +37,9 @@ class DetailFragment : Fragment()
             Log.i(ContentValues.TAG, "PIPOU LE PETIT PINGOUIN EST FAVORISÉ")
             if( AppDatabaseHelper.getDatabase(this.context!!).carsDAO().checkIfAlreadyExist(car.id) == 0 ){
                 AppDatabaseHelper.getDatabase(this.context!!).carsDAO().insert(car)
+                Toast.makeText(this.context, car.name + " a été ajouté aux favoris", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this.context, car.name + " est déjà enregistré dans les favoris", Toast.LENGTH_LONG).show()
             }
         }
         return viewDetail
