@@ -17,6 +17,7 @@ import com.example.kotlin.models.Car
 import androidx.appcompat.widget.SwitchCompat
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
@@ -144,11 +145,13 @@ class MainActivity : AppCompatActivity() {
             bundle.putString("co2", c.co2)
             bundle.putString("image", c.image)
             bundle.putString("price", c.price)
+            bundle.putString("price", c.price)
             fragment.arguments = bundle
 
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.lateral_detail, fragment, "exemple2")
             transaction.commit()
+
         }
     }
 

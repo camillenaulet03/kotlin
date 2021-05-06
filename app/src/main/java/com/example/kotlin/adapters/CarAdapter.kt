@@ -47,7 +47,6 @@ class CarAdapter(private var carList: MutableList<Car>, private var act : MainAc
 
         init {
             itemView.setOnClickListener {
-                Log.i(TAG, "PIPOU LE PETIT PINGOUIN")
 
                 act.showDetail(carList[adapterPosition])
                 onItemClick?.invoke(carList[adapterPosition])
