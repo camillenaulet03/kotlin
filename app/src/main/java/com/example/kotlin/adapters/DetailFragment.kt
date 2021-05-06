@@ -1,16 +1,13 @@
 package com.example.kotlin.adapters
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kotlin.R
 import com.example.kotlin.helpers.AppDatabaseHelper
@@ -34,7 +31,7 @@ class DetailFragment : Fragment()
 
         var car = Car(arguments.getLong("id"),arguments.getString("name")!!,arguments.getString("price")!!,arguments.getString("co2")!!,arguments.getString("image")!!)
         viewDetail.findViewById<Button>(R.id.favoriteButton).setOnClickListener {
-            Log.i(ContentValues.TAG, "PIPOU LE PETIT PINGOUIN EST FAVORISÉ")
+            Log.i(TAG, "PIPOU LE PETIT PINGOUIN EST FAVORISÉ")
             if( AppDatabaseHelper.getDatabase(this.context!!).carsDAO().checkIfAlreadyExist(car.id) == 0 ){
                 AppDatabaseHelper.getDatabase(this.context!!).carsDAO().insert(car)
                 Toast.makeText(this.context, car.name + " a été ajouté aux favoris", Toast.LENGTH_LONG).show()

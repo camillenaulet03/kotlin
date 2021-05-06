@@ -134,7 +134,6 @@ class MainActivity : AppCompatActivity() {
             bundle.putString("co2", c.co2)
             bundle.putString("image", c.image)
             bundle.putString("price", c.price)
-            bundle.putString("price", c.price)
             fragment.arguments = bundle
 
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
