@@ -3,6 +3,7 @@ package com.example.kotlin
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.content.res.Configuration
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import com.example.kotlin.adapters.CarAdapter
 import com.example.kotlin.adapters.DetailFragment
 import com.example.kotlin.api.ApiCar
 import com.example.kotlin.api.ApiSingleton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -125,18 +127,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     public fun showDetail(c : Car){
-        Log.i(ContentValues.TAG, "PIPOU LE PETIT PINGOUIN EST AFFICHÉ")
-        val fragment = DetailFragment()
-        val bundle = Bundle()
-        bundle.putLong("id", c.id)
-        bundle.putString("name", c.name)
-        bundle.putString("co2", c.co2)
-        bundle.putString("image", c.image)
-        bundle.putString("price", c.price)
-        fragment.arguments = bundle
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.lateral_detail, fragment, "exemple2")
-        transaction.commit()
+        if(resources.configuration.orientation== Configuration.ORIENTATION_PORTRAIT){
+            val intent = Intent(this@MainActivity,DetailActivity::class.java)
+            intent.putExtra("id", c.id)
+            intent.putExtra("name", c.name)
+            intent.putExtra("image", c.image)
+            intent.putExtra("co2", c.co2)
+            intent.putExtra("price", c.price)
+            startActivity(intent)
+        } else {
+            Log.i(ContentValues.TAG, "PIPOU LE PETIT PINGOUIN EST AFFICHÉ")
+            val fragment = DetailFragment()
+            val bundle = Bundle()
+            bundle.putLong("id", c.id)
+            bundle.putString("name", c.name)
+            bundle.putString("co2", c.co2)
+            bundle.putString("image", c.image)
+            bundle.putString("price", c.price)
+            fragment.arguments = bundle
+
+            val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.lateral_detail, fragment, "exemple2")
+            transaction.commit()
+        }
     }
 
 }

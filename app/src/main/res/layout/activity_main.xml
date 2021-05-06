@@ -11,56 +11,53 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/list_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        <RelativeLayout
+            android:id="@+id/list_container"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_car"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/switch_favoris"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_car"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/switch_favoris"
+                android:paddingBottom="50dp"/>
 
-    <RelativeLayout
-        android:id="@+id/switch_favoris"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#cecece"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+            <RelativeLayout
+                android:id="@+id/switch_favoris"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#cecece"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_car">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_button"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_centerInParent="true"
-            android:layoutDirection="rtl"
-            app:switchPadding="8dp"
-            android:text="Favoris"
-            android:textSize="24sp"
-            android:textColor="@color/black" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true"
+                    android:layoutDirection="rtl"
+                    android:text="Favoris"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:switchPadding="8dp" />
 
-    </RelativeLayout>
-    </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/lateral_detail_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/lateral_detail"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/lateral_detail_container"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </FrameLayout>
-    </LinearLayout>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/lateral_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+            </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
