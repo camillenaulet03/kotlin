@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         this.adaptConfigOrientation();
-        val carsList = AppDatabaseHelper.getDatabase(this).countriesDAO().getCarList()
+        val carsList = AppDatabaseHelper.getDatabase(this).carsDAO().getCarList()
 
         // Progress Bar
         val progressDialog = ProgressDialog(this)
@@ -85,7 +85,8 @@ class MainActivity : AppCompatActivity() {
                        AppDatabaseHelper
                            .getDatabase(this)
                            .carsDAO()
-                           .getCarList() )
+                           .getCarList(), this@MainActivity
+               )
                 recycler.adapter = adapter
             } else {
                 ApiSingleton.getSingleton.getCars().enqueue(object : Callback<List<ApiCar>> {
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                             cars.add(Car(car.id,car.nom,car.prixjournalierbase,car.categorieco2,car.image))
                         }
 
-                        val carAdapter = CarAdapter(cars)
+                        val carAdapter = CarAdapter(cars, this@MainActivity)
                         recycler.adapter = carAdapter
 
                     }
