@@ -22,8 +22,8 @@ class CarAdapter(private var carList: MutableList<Car>) : RecyclerView.Adapter<C
     override fun onBindViewHolder(holder: CarViewHolder, position: Int)      {
 
     holder.textViewCarName .text = carList[position].name
-    holder.textViewCarPrice.text = carList[position].price
-    holder.textViewCarCO2.text = carList[position].co2
+    holder.textViewCarPrice.text = carList[position].price + ("€ / jour")
+    holder.textViewCarCO2.text = ("Catégorie CO2 : ") + carList[position].co2
 
     Picasso.get().load("http://s519716619.onlinehome.fr/exchange/madrental/images/"+carList[position].image).fit().centerInside().into(holder.imageViewCarPicture)
     }
