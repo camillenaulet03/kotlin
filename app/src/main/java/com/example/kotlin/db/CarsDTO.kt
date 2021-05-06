@@ -7,10 +7,12 @@ import com.example.kotlin.models.Car
 abstract class CarsDTO {
     @Query("SELECT * FROM cars")
     abstract fun getCarList(): MutableList<Car>
+    @Query("SELECT * FROM cars WHERE id LIKE :id")
+    abstract fun checkIfAlreadyExist(id:Long): Car
     @Insert
-    abstract fun insert(vararg country: Car)
+    abstract fun insert(vararg car: Car)
     @Update
-    abstract fun update(vararg country: Car)
+    abstract fun update(vararg car: Car)
     @Delete
-    abstract fun delete(vararg country: Car)
+    abstract fun delete(vararg car: Car)
 }

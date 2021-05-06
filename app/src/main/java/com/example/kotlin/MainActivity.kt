@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin.helpers.AppDatabaseHelper
 import com.example.kotlin.models.Car
 
+import androidx.appcompat.widget.SwitchCompat
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -60,7 +61,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<ApiCar>>?, response: Response<List<ApiCar>>?) {
                 progressDialog.dismiss()
                 data.addAll(response!!.body()!!)
-                Log.d("montag", data.toString())
 
                 val cars : MutableList<Car> = ArrayList()
 
@@ -77,6 +77,38 @@ class MainActivity : AppCompatActivity() {
                 progressDialog.dismiss()
             }
         })
+
+        val switch = findViewById<SwitchCompat>(R.id.switch_button)
+        switch?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+               val adapter = CarAdapter(
+                       AppDatabaseHelper
+                           .getDatabase(this)
+                           .carsDAO()
+                           .getCarList() )
+                recycler.adapter = adapter
+            } else {
+                ApiSingleton.getSingleton.getCars().enqueue(object : Callback<List<ApiCar>> {
+                    override fun onResponse(call: Call<List<ApiCar>>?, response: Response<List<ApiCar>>?) {
+                        progressDialog.dismiss()
+
+                        val cars : MutableList<Car> = ArrayList()
+
+                        for(car in data){
+                            cars.add(Car(car.id,car.nom,car.prixjournalierbase,car.categorieco2,car.image))
+                        }
+
+                        val carAdapter = CarAdapter(cars)
+                        recycler.adapter = carAdapter
+
+                    }
+
+                    override fun onFailure(call: Call<List<ApiCar>>?, t: Throwable?) {
+                        progressDialog.dismiss()
+                    }
+            })
+            }
+        }
 
     }
 
