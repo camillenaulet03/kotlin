@@ -7,5 +7,5 @@ import com.example.kotlin.models.Car
 @Database(entities = [Car::class], version = 1)
 abstract class AppDatabase : RoomDatabase()
 {
-    abstract fun countriesDAO(): CarsDTO
+    abstract fun carsDAO(): CarsDTO
 }
