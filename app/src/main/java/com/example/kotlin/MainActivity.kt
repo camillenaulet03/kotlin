@@ -1,11 +1,8 @@
 package com.example.kotlin
 
-import android.app.Activity
 import android.app.ProgressDialog
-import android.content.ContentValues
 import android.content.Intent
 import android.content.res.Configuration
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -15,9 +12,6 @@ import com.example.kotlin.helpers.AppDatabaseHelper
 import com.example.kotlin.models.Car
 
 import androidx.appcompat.widget.SwitchCompat
-import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
@@ -25,7 +19,6 @@ import com.example.kotlin.adapters.CarAdapter
 import com.example.kotlin.adapters.DetailFragment
 import com.example.kotlin.api.ApiCar
 import com.example.kotlin.api.ApiSingleton
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         this.adaptConfigOrientation();
-        val carsList = AppDatabaseHelper.getDatabase(this).carsDAO().getCarList()
 
         // Progress Bar
         val progressDialog = ProgressDialog(this)
@@ -58,8 +50,6 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recycler.layoutManager = layoutManager
 
-//        val adapter = CarAdapter(data)
-//        recycler.adapter = adapter
         ApiSingleton.getSingleton.getCars().enqueue(object : Callback<List<ApiCar>> {
             override fun onResponse(call: Call<List<ApiCar>>?, response: Response<List<ApiCar>>?) {
                 progressDialog.dismiss()
@@ -114,11 +104,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
     }
 
     public fun adaptConfigOrientation() {
-        Log.i(ContentValues.TAG, "onCreate: " + resources.configuration.orientation)
-        Log.i(ContentValues.TAG, "onConfigurationChanged: ")
         var cont = findViewById<LinearLayout>(R.id.lateral_detail_container)
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             cont.isVisible = true
@@ -137,7 +127,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("price", c.price)
             startActivity(intent)
         } else {
-            Log.i(ContentValues.TAG, "PIPOU LE PETIT PINGOUIN EST AFFICHÉ")
             val fragment = DetailFragment()
             val bundle = Bundle()
             bundle.putLong("id", c.id)
