@@ -1,15 +1,12 @@
 package com.example.kotlin.adapters
 
-import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin.MainActivity
 import com.example.kotlin.R

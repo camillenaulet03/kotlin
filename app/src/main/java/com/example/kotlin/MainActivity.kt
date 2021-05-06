@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     public fun adaptConfigOrientation() {
-        var cont = findViewById<LinearLayout>(R.id.lateral_detail_container)
+        val cont = findViewById<LinearLayout>(R.id.lateral_detail_container)
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             cont.isVisible = true
         } else if (resources.configuration.orientation== Configuration.ORIENTATION_PORTRAIT) {

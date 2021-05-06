@@ -1,9 +1,6 @@
 package com.example.kotlin.adapters
 
-import android.content.ContentValues.TAG
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +28,6 @@ class DetailFragment : Fragment()
 
         var car = Car(arguments.getLong("id"),arguments.getString("name")!!,arguments.getString("price")!!,arguments.getString("co2")!!,arguments.getString("image")!!)
         viewDetail.findViewById<Button>(R.id.favoriteButton).setOnClickListener {
-            Log.i(TAG, "PIPOU LE PETIT PINGOUIN EST FAVORISÉ")
             if( AppDatabaseHelper.getDatabase(this.context!!).carsDAO().checkIfAlreadyExist(car.id) == 0 ){
                 AppDatabaseHelper.getDatabase(this.context!!).carsDAO().insert(car)
                 Toast.makeText(this.context, car.name + " a été ajouté aux favoris", Toast.LENGTH_LONG).show()
@@ -46,6 +42,5 @@ class DetailFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
         val arguments = requireArguments()
-        Log.i(TAG, "PINGU  " + arguments.toString())
     }
 }
